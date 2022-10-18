@@ -15,16 +15,44 @@ let numbers = [];
 
 // <!-- Creo evento sul bottone per visualizzare griglia di gioco (inserisco display block) -->
 const startBtn = document.querySelector(".genera_btn");
-
 startBtn.addEventListener("click", function(){
  generateGrid (100); 
 })
+
+// Creo 16 numeri random
+// const newRandom = generateRandom(1, 16)
+// console.log(newRandom);
+
+let randomNumbers = [];
+while (randomNumbers.length <= 16) {
+    const num = Math.floor(Math.random() * 100);
+    console.log(num);
+    if (!randomNumbers.includes(num)) {
+        randomNumbers.push(num);
+    }
+    randomNumbers++
+    console.log(randomNumbers)
+}
+
+
+// function generateRandom(min, max){
+    // while (randomNumbers = length < 16){ 
+    //    for (let i = 1; i <= 16; i++){
+        //    let num = Math.floor(Math.random() * (100 - 1 + 1 )) + 1;
+        //    console.log[num];
+        //    if(!randomNumbers.includes(num)){
+        //        randomNumbers.push(num);
+        //    }
+// randomNumbers
+    //    }
+    // }
+
+
 
 // FUNCTIONS
 // <!-- Aggiungo numerazione progressiva da 1 a 100 sulla griglia 10X10caselle e creo la griglia in cui inwerirli-->
 function generateGrid(numeroCelle) {
     for(let i = 1; i < numeroCelle + 1; i++){ 
-        console.log([i]);
         thisNumber = [i];
         row = document.querySelector(".row");
         square = document.createElement("div");
