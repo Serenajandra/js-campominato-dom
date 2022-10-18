@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* UTILITIES */
+.bg_blue{
+    background-color: rgb(83, 179, 235);
+}
+
+.d_block{
+    display: block;
+}
+.d_hidden{
+    display: none !important;
+}
+
+/* CONTAINER */
+
+.title{
+    margin: 3rem auto;
+    text-align: center;
+}
+
+.btn_container{
+    margin: 3rem auto;
+    text-align: center;
+}
+
+.col{
+    border: 1px solid purple;
+    /* width: 70px;
+    min-height: 70px; */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row{
+    width: 500px;
+    height: 500px;
+    border: 1px, solid blue;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
