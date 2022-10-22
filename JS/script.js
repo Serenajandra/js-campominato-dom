@@ -12,47 +12,27 @@
 // <!-- ESECUZIONE -->
 
 let numbers = [];
-
-// <!-- Creo evento sul bottone per visualizzare griglia di gioco (inserisco display block) -->
+let cellNumbers= 100;
+// <!-- Creo bottone per visualizzare griglia di gioco (inserisco display block) -->
 const startBtn = document.querySelector(".genera_btn");
 startBtn.addEventListener("click", function(){
- generateGrid (100); 
+    const gridContainer = document.querySelector(".row");
+    gridContainer.innerHTML= "";
+    generateGrid(100); 
 })
 
 // Creo 16 numeri random
-// const newRandom = generateRandom(1, 16)
-// console.log(newRandom);
+const bombs = generateRandom(16);
+console.log(bombs)
 
-let randomNumbers = [];
-while (randomNumbers.length <= 16) {
-    const num = Math.floor(Math.random() * 100);
-    console.log(num);
-    if (!randomNumbers.includes(num)) {
-        randomNumbers.push(num);
-    }
-    randomNumbers++
-    console.log(randomNumbers)
-}
-
-
-// function generateRandom(min, max){
-    // while (randomNumbers = length < 16){ 
-    //    for (let i = 1; i <= 16; i++){
-        //    let num = Math.floor(Math.random() * (100 - 1 + 1 )) + 1;
-        //    console.log[num];
-        //    if(!randomNumbers.includes(num)){
-        //        randomNumbers.push(num);
-        //    }
-// randomNumbers
-    //    }
-    // }
 
 
 
 // FUNCTIONS
-// <!-- Aggiungo numerazione progressiva da 1 a 100 sulla griglia 10X10caselle e creo la griglia in cui inwerirli-->
-function generateGrid(numeroCelle) {
-    for(let i = 1; i < numeroCelle + 1; i++){ 
+
+// <!-- Funzione per Aggiungere numerazione progressiva da 1 a 100 sulla griglia 10X10caselle e creo la griglia in cui inwerirli-->
+function generateGrid(cellNumbers) {
+    for(let i = 1; i < cellNumbers + 1; i++){ 
         thisNumber = [i];
         row = document.querySelector(".row");
         square = document.createElement("div");
@@ -61,14 +41,51 @@ function generateGrid(numeroCelle) {
         square.classList.add("col");
         square.innerHTML = (`${thisNumber}`);
         row.append(square);
+        // Quando l'utente clicca sulla cella, la cella diventa blu  o rossa a seconda della consizione
         square.addEventListener("click", handleSquareClick);
-        console.log(square)
+        // console.log(square)
     }
 };
 
-// <!-- Aggiungo evento su ciascuna cella, la cella cliccata si colora di azzurro ed emetto un messaggio in console con il numero della cella cliccata. -->
-
+// <!--Funzione per aggiungere evento su ciascuna cella, la cella cliccata si colora:
+    //  SE il numero è presente nella lista dei numeri generati 
+    //     - abbiamo calpestato una bomba 
+    //     - la cella si colora di rosso e la partita termina, 
+    // ALTRIMENTI 
+    //     - la cella cliccata si colora di azzurro e 
+    //     - l'utente può continuare a cliccare sulle altre celle.
 function handleSquareClick(){
-    this.classList.add("bg_blue")
-    console.log(parseInt(this.textContent));
+    const clickedSquare = parseInt(this.textContent);
+    if(bombs.includes(clickedSquare)){
+        this.classList.add("bg_red");
+        removeclick()
+    } else{    
+        this.classList.add("bg_blue");
+    }
+};
+
+// Funzione per rimuovere il click quando l'utente perde
+function removeclick() {
+    const grid = document.getElementsByClassName("col");
+    for (let i = 0; i < grid.length; i++) {
+        const thisSquare = grid[i];
+        thisSquare.removeEventListener("click", handleSquareClick);
+    }
+};
+
+
+
+
+// Funzione per generare numeri random
+function generateRandom(max) {
+    let randomNumbersArray = []
+    while (randomNumbersArray.length < max) {
+        const thisNumber = Math.floor(Math.random() * (100 - 1 + 1)) + 1;
+        // console.log(thisNumber)
+        if (!randomNumbersArray.includes(thisNumber)) {
+             randomNumbersArray.push(thisNumber);
+        }
+    }
+    // console.log(randomNumbersArray)
+    return randomNumbersArray;   
 };
